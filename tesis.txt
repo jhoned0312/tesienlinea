@@ -1,0 +1,138 @@
+int analogico1=2;
+int analogico2=3;
+int a=4;
+int b=5;
+int c=6;
+int d=7;
+
+const int triger=8;
+const int echo=9;
+long tiempo;
+long distancia;
+
+const int triger2=10;
+const int echo2=11;
+long tiempo2;
+long distancia2;
+
+const int triger3=12;
+const int echo3=13;
+long tiempo3;
+long distancia3;
+
+
+void setup() {
+  // put your setup code here, to run once:
+pinMode(analogico1, OUTPUT);
+pinMode(analogico2, OUTPUT);
+pinMode(a,OUTPUT);
+pinMode(b,OUTPUT);
+pinMode(c,OUTPUT);
+pinMode(d,OUTPUT);
+
+pinMode(triger,OUTPUT);
+pinMode(echo,INPUT);
+
+pinMode(triger2,OUTPUT);
+pinMode(echo2,INPUT);
+
+pinMode(triger3,OUTPUT);
+pinMode(echo3,INPUT);
+
+Serial.begin(9600);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  digitalWrite(triger,LOW);
+  delayMicroseconds(10);
+  digitalWrite(triger,HIGH);
+  tiempo= pulseIn(echo, HIGH);
+  tiempo= tiempo / 2;
+  distancia= int(0.034 * tiempo);
+  Serial.println(distancia);
+
+digitalWrite(triger2,LOW);
+  delayMicroseconds(10);
+  digitalWrite(triger2,HIGH);
+  tiempo2= pulseIn(echo2, HIGH);
+  tiempo2= tiempo2 / 2;
+  distancia2= int(0.034 * tiempo2);
+  Serial.println(distancia2);
+
+digitalWrite(triger3,LOW);
+  delayMicroseconds(10);
+  digitalWrite(triger3,HIGH);
+  tiempo3= pulseIn(echo3, HIGH);
+  tiempo3= tiempo3 / 2;
+  distancia3= int(0.034 * tiempo3);
+  Serial.println(distancia3);
+
+
+/*if(distancia<=10){
+  Serial.println("menor");
+  }else{
+  if(distancia>=90){
+  Serial.println(" mayor");
+  }}
+
+if(distancia2<=10){
+  Serial.println("valor menor del modulo es mucho menor");
+  }else{
+  if(distancia2>=90){
+  Serial.println("valor mayor del modulo es mucho mayor");
+  }}
+  */
+
+if(distancia>=10){
+digitalWrite(a,LOW);
+digitalWrite(b,HIGH);
+digitalWrite(c,LOW);
+digitalWrite(d,HIGH);
+analogWrite(analogico1,250);
+analogWrite(analogico2,250);
+delay(1000);
+analogWrite(analogico1,150);
+analogWrite(analogico2,150);
+
+} else if(distancia2 <= 10){
+  digitalWrite(a,HIGH);
+  digitalWrite(b,LOW);
+  digitalWrite(c,LOW);
+digitalWrite(d,LOW);
+analogWrite(analogico1,250);
+analogWrite(analogico2,250);
+  delay(1000);
+analogWrite(analogico1,150);
+analogWrite(analogico2,150);
+  }else{
+     digitalWrite(a,LOW);
+  digitalWrite(b,LOW);
+  digitalWrite(c,HIGH);
+digitalWrite(d,LOW);
+analogWrite(analogico1,250);
+analogWrite(analogico2,250);
+  delay(1000);
+analogWrite(analogico1,150);
+analogWrite(analogico2,150);
+    }
+
+
+/*delay(1000);
+analogWrite(analogico1,0);
+analogWrite(analogico2,0);
+delay(1000);*/
+
+
+/*digitalWrite(a,HIGH);
+digitalWrite(b,LOW);
+digitalWrite(c,HIGH);
+digitalWrite(d,LOW);
+analogWrite(analogico1,250);
+analogWrite(analogico2,250);
+delay(1000);
+analogWrite(analogico1,0);
+analogWrite(analogico2,0);
+delay(1000);*/
+}
